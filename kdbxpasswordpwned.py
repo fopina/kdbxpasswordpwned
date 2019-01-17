@@ -11,6 +11,10 @@ def build_parser():
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('kdbx', type=str,
                         help='keepass file')
+    parser.add_argument('-u', '--show-user', action='store_true',
+                        help='show username for found entries')
+    parser.add_argument('-p', '--show-password', action='store_true',
+                        help='show password for found entries (high shoulders?)')
     return parser
 
 
@@ -35,7 +39,12 @@ def main():
                 continue
             r = check_hash(kv['Password'])
             if r > 0:
-                print('Password for %s (%s) seen %d times before' % (kv['Title'], uuid, r))
+                m = 'Password for %s (%s) seen %d times before' % (kv['Title'], uuid, r)
+                if args.show_user:
+                    m += ' - %s' % kv.get('UserName', '(none)')
+                if args.show_password:
+                    m += ' - %s' % kv['Password']
+                print(m)
 
 
 if __name__ == '__main__':
