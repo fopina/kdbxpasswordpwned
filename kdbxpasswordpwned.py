@@ -41,7 +41,7 @@ def main():
             if r > 0:
                 m = 'Password for %s (%s) seen %d times before' % (kv['Title'], uuid, r)
                 if args.show_user:
-                    m += ' - %s' % kv.get('UserName', '(none)')
+                    m += ' - %s' % kv.get('UserName')
                 if args.show_password:
                     m += ' - %s' % kv['Password']
                 print(m)
