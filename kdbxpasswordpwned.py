@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import libkeepass
 import requests
 import hashlib

@@ -1,0 +1,2 @@
+libkeepass==0.3.0
+requests==2.20.1
