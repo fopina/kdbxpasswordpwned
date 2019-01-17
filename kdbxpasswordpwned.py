@@ -27,10 +27,12 @@ def check_hash(password):
 def main():
     args = build_parser().parse_args()
 
-    with libkeepass.open(args.kdbx, password=getpass.getpass()) as kdb:
+    with libkeepass.open(args.kdbx, password=getpass.getpass(), mode='rb') as kdb:
         for entry in kdb.obj_root.findall('.//Group/Entry'):
             uuid = entry.find('./UUID').text
             kv = {string.find('./Key').text: string.find('./Value').text for string in entry.findall('./String')}
+            if not kv['Password']:
+                continue
             r = check_hash(kv['Password'])
             if r > 0:
                 print('Password for %s (%s) seen %d times before' % (kv['Title'], uuid, r))
