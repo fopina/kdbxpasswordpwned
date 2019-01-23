@@ -25,7 +25,6 @@ Password for title2 (GUx7/Ho/YWc41r1sco5/ZA==) seen 61164 times before
 
 Or the docker image
 
-```
 ```bash
 $ docker run --rm -ti -v /path/to/file.kdbx:/tmp.kdbx:ro fopina/kdbxpasswordpwned -up /tmp.kdbx
 Password for title1 (HKlue477ZHBV/JaLQj/1QQ==) seen 1151 times before - testuser - testit
