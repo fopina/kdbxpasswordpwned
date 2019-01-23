@@ -11,6 +11,7 @@ def build_parser():
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('kdbx', type=str,
                         help='keepass file')
+    parser.add_argument('-k', '--keyfile', help='Keyfile if needed')
     parser.add_argument('-u', '--show-user', action='store_true',
                         help='show username for found entries')
     parser.add_argument('-p', '--show-password', action='store_true',
@@ -31,7 +32,7 @@ def check_hash(password):
 def main():
     args = build_parser().parse_args()
 
-    with libkeepass.open(args.kdbx, password=getpass.getpass(), mode='rb') as kdb:
+    with libkeepass.open(args.kdbx, password=getpass.getpass(), keyfile=args.keyfile, mode='rb') as kdb:
         for entry in kdb.obj_root.findall('.//Group/Entry'):
             uuid = entry.find('./UUID').text
             kv = {string.find('./Key').text: string.find('./Value').text for string in entry.findall('./String')}
