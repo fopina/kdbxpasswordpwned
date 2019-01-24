@@ -1,3 +1,5 @@
-.coverage
-.idea
+/.coverage
+/.idea
 *.pyc
+/dist
+/MANIFEST

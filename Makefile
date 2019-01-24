@@ -22,5 +22,11 @@ test:
 dockertest: build
 	docker run --rm -ti $(IMAGE) -h
 
+pypi:
+	python setup.py sdist upload
 
-.PHONY: push build travis-dev travis-tag test dockertest
+pypitest:
+	python setup.py sdist upload -r https://test.pypi.org/legacy/
+
+
+.PHONY: push build travis-dev travis-tag test dockertest pypi pypitest

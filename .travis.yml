@@ -31,3 +31,11 @@ jobs:
       script:
         - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
         - make travis-tag TAG=$TRAVIS_TAG
+        - echo $TRAVIS_TAG > VERSION
+      deploy:
+        provider: pypi
+        user: fopina
+        password: $PYPI_PASSWORD
+        skip_cleanup: true
+        on:
+          tags: true
