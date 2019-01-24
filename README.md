@@ -10,30 +10,44 @@ Check keepass passwords against https://haveibeenpwned.com/Passwords
 
 ### Usage
 
+Install using `pip`
+
 ```bash
-$ ./kdbxpasswordpwned.py -h
-usage: kdbxpasswordpwned.py [-h] [-u] [-p] kdbx
+$ pip install kdbxpasswordpwned
+Collecting kdbxpasswordpwned
+Successfully installed kdbxpasswordpwned-0.3
+```
+And use the CLI
+
+```bash
+$ kdbxpasswordpwned -h
+usage: kdbxpasswordpwned [-h] [-k KEYFILE] [-u] [-p] kdbx
 
 positional arguments:
-  kdbx                 keepass file
+  kdbx                  keepass file
 
 optional arguments:
-  -h, --help           show this help message and exit
-  -u, --show-user      show username for found entries
-  -p, --show-password  show password for found entries (high shoulders?)
+  -h, --help            show this help message and exit
+  -k KEYFILE, --keyfile KEYFILE
+                        Keyfile if needed
+  -u, --show-user       show username for found entries
+  -p, --show-password   show password for found entries (high shoulders?)
 ```
 
 ```bash
-$ ./kdbxpasswordpwned.py /path/to/file.kdbx
+$ kdbxpasswordpwned /path/to/test_assets/sample.kdbx
 Password:
-Password for title1 (HKlue477ZHBV/JaLQj/1QQ==) seen 1151 times before
-Password for title2 (GUx7/Ho/YWc41r1sco5/ZA==) seen 61164 times before
+Password for title1 (FEiAje5y9FQmdVCSFDuSRA==) seen 1151 times before
+Password for title2 (c3NVlIIN/pPhrM9Pk4Ow+Q==) seen 61164 times before
 ```
 
-Or the docker image
+Or simply use the docker image
 
 ```bash
-$ docker run --rm -ti -v /path/to/file.kdbx:/tmp.kdbx:ro fopina/kdbxpasswordpwned -up /tmp.kdbx
-Password for title1 (HKlue477ZHBV/JaLQj/1QQ==) seen 1151 times before - testuser - testit
-Password for title2 (GUx7/Ho/YWc41r1sco5/ZA==) seen 61164 times before - None - blabla
+$ docker run --rm -ti \
+             -v /path/to/test_assets/sample_with_key.kdbx:/tmp.kdbx:ro \
+             -v /path/to/test_assets/sample.key:/tmp.key:ro \
+             fopina/kdbxpasswordpwned -upk /tmp.key /tmp.kdbx
+Password for title1 (FEiAje5y9FQmdVCSFDuSRA==) seen 1151 times before - testuser - testit
+Password for title2 (c3NVlIIN/pPhrM9Pk4Ow+Q==) seen 61164 times before - None - blabla
 ```
