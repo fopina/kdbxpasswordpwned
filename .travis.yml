@@ -1,0 +1,29 @@
+language: python
+python:
+  - 2.7
+  - 3.4
+  - 3.7-dev
+
+branches:
+  only:
+    - master
+    - /^\d+\.\d+\.\d+.*$/
+
+script:
+    - pip install -r requirements.txt
+    - pip install -r test_assets/requirements.txt
+    - make test
+after_success: coveralls
+
+jobs:
+  include:
+    - stage: publish dev
+      if: tag is blank
+      script:
+        - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+        - make travis-dev
+    - stage: publish release
+      if: tag is present
+      script:
+        - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+        - make travis-tag TAG=$TRAVIS_TAG

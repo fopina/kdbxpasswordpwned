@@ -1,6 +1,10 @@
 # kdbxpasswordpwned
 Check keepass passwords against https://haveibeenpwned.com/Passwords
 
+[![Build Status](https://travis-ci.org/fopina/kdbxpasswordpwned.svg?branch=master)](https://travis-ci.org/fopina/kdbxpasswordpwned)
+[![](https://images.microbadger.com/badges/version/fopina/kdbxpasswordpwned.svg)](https://microbadger.com/images/fopina/kdbxpasswordpwned "Get your own version badge on microbadger.com")
+[![](https://images.microbadger.com/badges/image/fopina/kdbxpasswordpwned.svg)](https://microbadger.com/images/fopina/kdbxpasswordpwned "Get your own image badge on microbadger.com")
+
 ### Usage
 
 ```bash
