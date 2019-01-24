@@ -9,16 +9,20 @@ branches:
     - master
     - /^\d+\.\d+\.\d+.*$/
 
+install:
+  - pip install -r requirements.txt
+  - pip install -r test_assets/requirements.txt
+  - pip install coveralls
+
 script:
-    - pip install -r requirements.txt
-    - pip install -r test_assets/requirements.txt
-    - make test
-after_success: coveralls
+  - make test
+after_success:
+  - coveralls
 
 jobs:
   include:
     - stage: publish dev
-      if: tag is blank
+      if: tag is blank and type != "pull_request"
       script:
         - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
         - make travis-dev
