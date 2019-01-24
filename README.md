@@ -3,8 +3,10 @@ Check keepass passwords against https://haveibeenpwned.com/Passwords
 
 [![Build Status](https://travis-ci.org/fopina/kdbxpasswordpwned.svg?branch=master)](https://travis-ci.org/fopina/kdbxpasswordpwned)
 [![Coverage Status](https://coveralls.io/repos/github/fopina/kdbxpasswordpwned/badge.svg?branch=master)](https://coveralls.io/github/fopina/kdbxpasswordpwned?branch=master)
-[![](https://images.microbadger.com/badges/version/fopina/kdbxpasswordpwned.svg)](https://microbadger.com/images/fopina/kdbxpasswordpwned)
-[![](https://images.microbadger.com/badges/image/fopina/kdbxpasswordpwned.svg)](https://microbadger.com/images/fopina/kdbxpasswordpwned)
+[![Docker Version](https://images.microbadger.com/badges/version/fopina/kdbxpasswordpwned.svg)](https://microbadger.com/images/fopina/kdbxpasswordpwned)
+[![Docker Image](https://images.microbadger.com/badges/image/fopina/kdbxpasswordpwned.svg)](https://microbadger.com/images/fopina/kdbxpasswordpwned)
+[![PyPI Version](https://img.shields.io/pypi/v/kdbxpasswordpwned.svg)](https://pypi.python.org/pypi/kdbxpasswordpwned)
+[![PyPI Python Versions](https://img.shields.io/pypi/pyversions/kdbxpasswordpwned.svg)](https://pypi.python.org/pypi/kdbxpasswordpwned)
 
 ### Usage
 
