@@ -8,6 +8,12 @@ Check keepass passwords against https://haveibeenpwned.com/Passwords
 [![PyPI Version](https://img.shields.io/pypi/v/kdbxpasswordpwned.svg)](https://pypi.python.org/pypi/kdbxpasswordpwned)
 [![PyPI Python Versions](https://img.shields.io/pypi/pyversions/kdbxpasswordpwned.svg)](https://pypi.python.org/pypi/kdbxpasswordpwned)
 
+### Disclosure
+
+Even if Troy Hunt's API does provide some sense of privacy (as we don't share the password nor even the full SHA1), always review the tools you use with your KeePass files (such as this script which is small and you can easily see the password is not sent anywhere except HIBP API). I have reviewed libkeepass code (0.3.0, pinned in requirements) which is also small, and, as PyPI does not allow replacing existing versions, it is safe.
+
+Also be sure to install tools you trust from places you trust or you might end up installing some shady version such as [this fork](https://github.com/fopina/kdbxpasswordpwned/compare/master...SlivTaMere:bea0f5c) which sends the full password (not the hash) to a different endpoint.
+
 ### Usage
 
 Install using `pip`
