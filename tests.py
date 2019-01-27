@@ -137,6 +137,24 @@ Password for title2 seen 2 times before - None - blabla
             mock.call('blabla')
         ])
 
+    @mock.patch('getpass.getpass')
+    @mock.patch('kdbxpasswordpwned.check_hash')
+    def test_issue_4(self, ch_mock, gp_mock):
+        '''
+        https://github.com/fopina/kdbxpasswordpwned/issues/4
+        argon format support added by moving
+        from libkeepass to pykeepass
+        '''
+        gp_mock.return_value = '123456'
+        ch_mock.return_value = 0
+        with _capture_output() as fout:
+            kdbxpasswordpwned.main([
+                _asset('issue_4.kdbx'),
+            ])
+        self.assertEqual(fout[0].getvalue(), '')
+        ch_mock.assert_not_called()
+
+
 
 def _asset(name):
     return os.path.join(
