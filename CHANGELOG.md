@@ -2,6 +2,9 @@
 
 ## [unreleased]
 
+## [0.4] - 2019-01-27
+- changed to [pykeepass](https://github.com/pschmitt/pykeepass/)
+
 ## [0.2] - 2019-01-24
 - Support for key files [@julesduvivier](https://github.com/julesduvivier).
 - py3
