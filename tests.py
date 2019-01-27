@@ -63,7 +63,7 @@ FF:10
         gp_mock.return_value = 'wrong'
         self.assertRaisesRegexp(
             construct.ChecksumError,
-            "wrong checksum, read '.+?', computed '.+?'",
+            "wrong checksum, read b{0,1}'.+?', computed b{0,1}'.+?'",
             kdbxpasswordpwned.main,
             [_asset('sample.kdbx')]
         )
@@ -116,7 +116,7 @@ Password for title2 seen 2 times before - None - blabla
         gp_mock.return_value = 'reallysafeone'
         self.assertRaisesRegexp(
             construct.ChecksumError,
-            "wrong checksum, read '.+?', computed '.+?'",
+            "wrong checksum, read b{0,1}'.+?', computed b{0,1}'.+?'",
             kdbxpasswordpwned.main,
             [_asset('sample_with_key.kdbx')]
         )
