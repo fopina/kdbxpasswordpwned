@@ -20,7 +20,8 @@ def build_parser():
 
 
 def check_hash(password):
-    h = hashlib.sha1(password.encode()).hexdigest().upper()
+    password = password.encode('utf-8')
+    h = hashlib.sha1(password).hexdigest().upper()
     hh = h[5:]
     for l in requests.get('https://api.pwnedpasswords.com/range/' + h[:5]).content.decode().splitlines():
         ll = l.split(':')
