@@ -43,8 +43,8 @@ optional arguments:
 ```bash
 $ kdbxpasswordpwned /path/to/test_assets/sample.kdbx
 Password:
-Password for title1 (FEiAje5y9FQmdVCSFDuSRA==) seen 1151 times before
-Password for title2 (c3NVlIIN/pPhrM9Pk4Ow+Q==) seen 61164 times before
+Password for title1 seen 1151 times before
+Password for title2 seen 61164 times before
 ```
 
 Or simply use the docker image
@@ -54,6 +54,6 @@ $ docker run --rm -ti \
              -v /path/to/test_assets/sample_with_key.kdbx:/tmp.kdbx:ro \
              -v /path/to/test_assets/sample.key:/tmp.key:ro \
              fopina/kdbxpasswordpwned -upk /tmp.key /tmp.kdbx
-Password for title1 (FEiAje5y9FQmdVCSFDuSRA==) seen 1151 times before - testuser - testit
-Password for title2 (c3NVlIIN/pPhrM9Pk4Ow+Q==) seen 61164 times before - None - blabla
+Password for title1 seen 1151 times before - testuser - testit
+Password for title2 seen 61164 times before - None - blabla
 ```

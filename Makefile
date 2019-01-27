@@ -7,11 +7,11 @@ build:
 push: 
 	docker push $(IMAGE):latest
 
-travis-tag: build push
+travis-tag: build dockertest push
 	docker tag $(IMAGE) $(IMAGE):$(TAG)
 	docker push $(IMAGE):$(TAG)
 
-travis-dev: build
+travis-dev: build dockertest
 	docker tag $(IMAGE) $(IMAGE):dev
 	docker push $(IMAGE):dev
 
@@ -21,6 +21,11 @@ test:
 
 dockertest: build
 	docker run --rm -ti $(IMAGE) -h
+	echo "reallysafeone" | docker run --rm -i \
+			   -v $(ROOT)/test_assets/sample_with_key.kdbx:/tmp.kdbx:ro \
+               -v $(ROOT)/test_assets/sample.key:/tmp.key:ro \
+               $(IMAGE) \
+               -upk /tmp.key /tmp.kdbx
 
 pypi:
 	python setup.py sdist upload
