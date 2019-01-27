@@ -6,6 +6,7 @@ import mock
 from contextlib import contextmanager
 import sys
 import os
+import construct
 try:
     from cStringIO import StringIO
 except ImportError:
@@ -61,8 +62,8 @@ FF:10
     def test_wrong_password(self, gp_mock):
         gp_mock.return_value = 'wrong'
         self.assertRaisesRegexp(
-            IOError,
-            'Master key invalid.',
+            construct.ChecksumError,
+            "wrong checksum, read b{0,1}'.+?', computed b{0,1}'.+?'",
             kdbxpasswordpwned.main,
             [_asset('sample.kdbx')]
         )
@@ -79,8 +80,8 @@ FF:10
         self.assertEqual(
             fout[0].getvalue(),
             '''\
-Password for title1 (FEiAje5y9FQmdVCSFDuSRA==) seen 3 times before
-Password for title2 (c3NVlIIN/pPhrM9Pk4Ow+Q==) seen 3 times before
+Password for title1 seen 3 times before
+Password for title2 seen 3 times before
 '''
         )
         ch_mock.assert_has_calls([
@@ -101,8 +102,8 @@ Password for title2 (c3NVlIIN/pPhrM9Pk4Ow+Q==) seen 3 times before
         self.assertEqual(
             fout[0].getvalue(),
             '''\
-Password for title1 (FEiAje5y9FQmdVCSFDuSRA==) seen 2 times before - testuser - testit
-Password for title2 (c3NVlIIN/pPhrM9Pk4Ow+Q==) seen 2 times before - None - blabla
+Password for title1 seen 2 times before - testuser - testit
+Password for title2 seen 2 times before - None - blabla
 '''
         )
         ch_mock.assert_has_calls([
@@ -114,8 +115,8 @@ Password for title2 (c3NVlIIN/pPhrM9Pk4Ow+Q==) seen 2 times before - None - blab
     def test_run_keyfile_missing(self, gp_mock):
         gp_mock.return_value = 'reallysafeone'
         self.assertRaisesRegexp(
-            IOError,
-            'Master key invalid.',
+            construct.ChecksumError,
+            "wrong checksum, read b{0,1}'.+?', computed b{0,1}'.+?'",
             kdbxpasswordpwned.main,
             [_asset('sample_with_key.kdbx')]
         )

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import libkeepass
+import pykeepass
 import requests
 import hashlib
 import argparse
@@ -32,19 +32,17 @@ def check_hash(password):
 def main(args=None):
     opt = build_parser().parse_args(args)
 
-    with libkeepass.open(opt.kdbx, password=getpass.getpass(), keyfile=opt.keyfile, mode='rb') as kdb:
-        for entry in kdb.obj_root.findall('.//Group/Entry'):
-            uuid = entry.find('./UUID').text
-            kv = {string.find('./Key').text: string.find('./Value').text for string in entry.findall('./String')}
-            if not kv['Password']:
+    with pykeepass.PyKeePass(opt.kdbx, password=getpass.getpass(), keyfile=opt.keyfile) as kdb:
+        for entry in kdb.entries:
+            if not entry.password:
                 continue
-            r = check_hash(kv['Password'])
+            r = check_hash(entry.password)
             if r > 0:
-                m = 'Password for %s (%s) seen %d times before' % (kv['Title'], uuid, r)
+                m = 'Password for %s seen %d times before' % (entry.title, r)
                 if opt.show_user:
-                    m += ' - %s' % kv.get('UserName')
+                    m += ' - %s' % entry.username
                 if opt.show_password:
-                    m += ' - %s' % kv['Password']
+                    m += ' - %s' % entry.password
                 print(m)
 
 
