@@ -1,6 +1,8 @@
 # Changelog
 
 ## [unreleased]
+
+## [0.5] - 2019-01-28
 - fix for https://github.com/fopina/kdbxpasswordpwned/issues/3
 
 ## [0.4] - 2019-01-27
