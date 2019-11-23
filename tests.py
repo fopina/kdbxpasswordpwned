@@ -15,24 +15,25 @@ except ImportError:
 
 class TestKPP(unittest.TestCase):
     def test_usage(self):
+        name = os.path.basename(sys.argv[0])
         with _capture_output() as fout:
             self.assertRaisesRegexp(SystemExit, '2', kdbxpasswordpwned.main)
         try:
             self.assertEqual(
                 fout[1].getvalue(),
                 '''\
-usage: tests.py [-h] [-k KEYFILE] [-u] [-p] kdbx
-tests.py: error: too few arguments
-'''
+usage: {name} [-h] [-k KEYFILE] [-u] [-p] kdbx
+{name}: error: too few arguments
+'''.format(name=name)
             )
         except AssertionError:
             # check py3 argparse output
             self.assertEqual(
                 fout[1].getvalue(),
                 '''\
-usage: tests.py [-h] [-k KEYFILE] [-u] [-p] kdbx
-tests.py: error: the following arguments are required: kdbx
-'''
+usage: {name} [-h] [-k KEYFILE] [-u] [-p] kdbx
+{name}: error: the following arguments are required: kdbx
+'''.format(name=name)
             )
 
     @mock.patch('requests.get')
