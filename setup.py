@@ -4,12 +4,12 @@ from distutils.core import setup
 
 README = open('README.md').read()
 try:
-	VERSION = open('VERSION').read().strip()
+    VERSION = open('VERSION').read().strip()
 except IOError:
-	VERSION = 'dev'
+    VERSION = 'dev'
 
 setup(
-	name='kdbxpasswordpwned',
+    name='kdbxpasswordpwned',
     version=VERSION,
     description='Check KeePass passwords against https://haveibeenpwned.com/Passwords',
     long_description_content_type='text/markdown',
@@ -19,12 +19,12 @@ setup(
     url='https://github.com/fopina/kdbxpasswordpwned',
     py_modules=['kdbxpasswordpwned'],
     install_requires=[
-    	'requests',
-    	'pykeepass',
+        'requests',
+        'pykeepass',
     ],
     entry_points={
-		'console_scripts': ['kdbxpasswordpwned=kdbxpasswordpwned:main']
-	},
+        'console_scripts': ['kdbxpasswordpwned=kdbxpasswordpwned:main']
+    },
     classifiers=[
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
