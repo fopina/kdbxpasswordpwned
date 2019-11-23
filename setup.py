@@ -20,7 +20,7 @@ setup(
     py_modules=['kdbxpasswordpwned'],
     install_requires=[
         'requests',
-        'pykeepass',
+        'pykeepass==3.1.2',
     ],
     entry_points={
         'console_scripts': ['kdbxpasswordpwned=kdbxpasswordpwned:main']
