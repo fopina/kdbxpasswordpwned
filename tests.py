@@ -6,7 +6,7 @@ import mock
 from contextlib import contextmanager
 import sys
 import os
-import construct
+from pykeepass.exceptions import CredentialsIntegrityError
 try:
     from cStringIO import StringIO
 except ImportError:
@@ -63,8 +63,8 @@ FF:10
     def test_wrong_password(self, gp_mock):
         gp_mock.return_value = 'wrong'
         self.assertRaisesRegexp(
-            construct.ChecksumError,
-            "wrong checksum, read b{0,1}'.+?', computed b{0,1}'.+?'",
+            CredentialsIntegrityError,
+            '^Credentials are wrong or integrity check failed$',
             kdbxpasswordpwned.main,
             [_asset('sample.kdbx')]
         )
@@ -116,8 +116,8 @@ Password for title2 seen 2 times before - None - blabla
     def test_run_keyfile_missing(self, gp_mock):
         gp_mock.return_value = 'reallysafeone'
         self.assertRaisesRegexp(
-            construct.ChecksumError,
-            "wrong checksum, read b{0,1}'.+?', computed b{0,1}'.+?'",
+            CredentialsIntegrityError,
+            '^Credentials are wrong or integrity check failed$',
             kdbxpasswordpwned.main,
             [_asset('sample_with_key.kdbx')]
         )
