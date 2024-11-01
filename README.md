@@ -1,3 +1,8 @@
+> ARCHIVED  
+> I no longer use keepass so I cannot maintain this.
+> Fork and do whatever you want with it.
+>
+
 # kdbxpasswordpwned
 Check keepass passwords against https://haveibeenpwned.com/Passwords
 
